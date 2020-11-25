@@ -12,13 +12,12 @@ class MessageController extends Controller
     public function create(Request $request): Response
     {
         $this->validate($request, [
-            'receiver_id' => 'required|integer',
             'message' => 'required',
         ]);
 
         $message = new Message;
 
-        $message->fill($request->all());
+        $message->message = $request->message;
         $message->user_id = Auth::id();
         $message->save();
 
@@ -36,7 +35,7 @@ class MessageController extends Controller
         }
 
         if (Auth::id() != $message->user_id) {
-            return (new Response('Unauthorized.', 401))
+            return (new Response(['status' => 'Unauthorized.'], 401))
                 ->header('Content-Type', 'application/json');
         }
 
@@ -58,7 +57,7 @@ class MessageController extends Controller
         }
 
         if (Auth::id() != $message->user_id) {
-            return (new Response('Unauthorized.', 401))
+            return (new Response(['status' => 'Unauthorized.'], 401))
                 ->header('Content-Type', 'application/json');
         }
 
@@ -79,13 +78,13 @@ class MessageController extends Controller
         }
 
         if (Auth::id() != $message->user_id) {
-            return (new Response('Unauthorized.', 401))
+            return (new Response(['status' => 'Unauthorized.'], 401))
                 ->header('Content-Type', 'application/json');
         }
 
         $message->delete();
 
-        return (new Response('Ok', 200))
+        return (new Response(['status' => 'Ok'], 200))
             ->header('Content-Type', 'application/json');
     }
 }

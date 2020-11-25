@@ -16,7 +16,8 @@ class UserController extends Controller
 {
     public function profile(): Response
     {
-        return (new Response(Auth::user(), 200))
+        Auth::user()->messages;
+        return (new Response(['user' => Auth::user()], 200))
             ->header('Content-Type', 'application/json');
     }
 
@@ -71,7 +72,7 @@ class UserController extends Controller
         }
 
         $user->delete();
-        return (new Response('Ok', 200))
+        return (new Response(['status' => 'Ok'], 200))
             ->header('Content-Type', 'application/json');
     }
 }
