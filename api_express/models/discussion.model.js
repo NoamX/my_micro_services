@@ -3,9 +3,23 @@ const { Schema } = mongoose;
 
 const DiscussionSchema = new Schema(
   {
-    //
+    name: {
+      type: String,
+      required: [true, "Name required."],
+      unique: true,
+    },
+    users: [
+      {
+        type: Number,
+        rqeuired: [true, "Users must be a least 2 and are required."],
+      },
+    ],
   },
   { timestamps: true }
 );
+
+DiscussionSchema.plugin(require("mongoose-unique-validator"), {
+  message: "{VALUE} is already taken.",
+});
 
 module.exports = mongoose.model("Discussion", DiscussionSchema);
