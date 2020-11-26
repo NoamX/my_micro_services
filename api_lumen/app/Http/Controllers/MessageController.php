@@ -13,11 +13,12 @@ class MessageController extends Controller
     {
         $this->validate($request, [
             'message' => 'required',
+            'receiver_id' => 'required|integer'
         ]);
 
         $message = new Message;
 
-        $message->message = $request->message;
+        $message->fill($request->all());
         $message->user_id = Auth::id();
         $message->save();
 

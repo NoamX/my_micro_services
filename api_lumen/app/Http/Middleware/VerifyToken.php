@@ -10,8 +10,7 @@ class VerifyToken
 {
     public function handle($request, Closure $next)
     {
-        if ($request->header('Authorization')) {
-            $token = explode(' ', $request->header('Authorization'))[1];
+        if (($token = $request->bearerToken())) {
             try {
                 JWT::decode($token, $_ENV['JWT_KEY'], ['HS384']);
             } catch (\Firebase\JWT\ExpiredException $e) {
