@@ -16,7 +16,7 @@ const DiscussionController = {
         .contentType("application/json")
         .json({
           errors: {
-            users: "Users must be a least 2 and are required.",
+            users: "Users must be 2 and are required.",
           },
         });
     }
@@ -69,7 +69,7 @@ const DiscussionController = {
         .contentType("application/json")
         .json({
           errors: {
-            users: "Users must be a least 2 and are required.",
+            users: "Users must be 2 and are required.",
           },
         });
     }

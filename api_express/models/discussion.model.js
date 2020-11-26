@@ -11,7 +11,7 @@ const DiscussionSchema = new Schema(
     users: [
       {
         type: Number,
-        rqeuired: [true, "Users must be a least 2 and are required."],
+        required: [true, "Users must be 2 and are required."],
       },
     ],
   },
